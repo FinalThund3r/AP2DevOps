@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello com Bolinha</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #111;
+        }
+
+        .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="ball" id="ball"></div>
+
+    <script>
+        const ball = document.getElementById("ball");
+        let x = 0, y = 0;
+        let dx = 3, dy = 3;
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function animate() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            x += dx;
+            y += dy;
+
+            if (x <= 0 || x + 50 >= width) {
+                dx *= -1;
+                ball.style.backgroundColor = getRandomColor();
+            }
+
+            if (y <= 0 || y + 50 >= height) {
+                dy *= -1;
+                ball.style.backgroundColor = getRandomColor();
+            }
+
+            ball.style.left = x + "px";
+            ball.style.top = y + "px";
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
